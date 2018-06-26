@@ -1,14 +1,14 @@
-package validator;
+package web.validator;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.Valid;
 
 public class User {
     @NotBlank(message = "名字不能为空字符串")
     private String name;
     private int age;
-    @NotNull(message = "企业不能为空")
+    @Valid()
     private Company company;
 
     public String getName() {

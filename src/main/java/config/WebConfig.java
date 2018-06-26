@@ -4,12 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import web.interceptor.TestInterceptor;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -17,7 +21,8 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("controller")
+@ComponentScan(basePackages = {"web.controller"})
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
@@ -61,4 +66,25 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         converter.setSupportedMediaTypes(list);
         return converter;
     }
+
+    /**
+     * 注册Spring MVC 拦截器
+     * @param registry 注册器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        super.addInterceptors(registry);
+        registry.addInterceptor(new TestInterceptor());
+    }
+
+    /**
+     * 跨域请求
+     * @param registry 注册器
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        super.addCorsMappings(registry);
+        registry.addMapping("");
+    }
+
 }

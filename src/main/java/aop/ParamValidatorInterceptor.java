@@ -1,49 +1,55 @@
 package aop;
 
+import exception.ValidateException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
 
-@Component
-@Aspect
+//@Component
+//@Aspect
+//@Order(2)
 public class ParamValidatorInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(ParamValidatorInterceptor.class);
 
-    @Pointcut("execution(* controller.UserController.get(..))")
-    public void matchController(){}
+    @Pointcut("execution(* web.controller.UserController.get(..))")
+//    @Pointcut("execution(* web.controller.UserController.get(..))")
+    public void matchController() {
+    }
 
     @Before("matchController()")
-    public void before(){
+    public void before() {
         logger.debug("before");
     }
 
     @After("matchController()")
-    public void after(){
+    public void after() {
         logger.debug("after");
     }
 
     @AfterReturning("matchController()")
-    public void afterReturning(){
+    public void afterReturning() {
         logger.debug("afterReturning");
     }
 
     @AfterThrowing("matchController()")
-    public void afterThrowing(){
+    public void afterThrowing() {
         logger.debug("afterThrowing");
     }
 
     @Around("matchController()")
-    public Object around(ProceedingJoinPoint joinPoint){
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.debug("around");
-        Object o = null;
-        try {
-            o = joinPoint.proceed();
-        } catch (Throwable e) {
-            e.printStackTrace();
+        Object[] args = joinPoint.getArgs();
+        Object lastParam = args[args.length - 1];
+        if (lastParam instanceof Errors) {
+            Errors errors = (Errors) lastParam;
+            if (errors.hasErrors()) {
+                throw new ValidateException(args[0], errors.getFieldError().getDefaultMessage());
+            }
         }
-        return o;
+        return joinPoint.proceed();
     }
 }

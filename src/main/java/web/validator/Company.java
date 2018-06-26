@@ -1,4 +1,4 @@
-package validator;
+package web.validator;
 
 import org.hibernate.validator.constraints.NotBlank;
 
