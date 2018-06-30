@@ -1,15 +1,16 @@
 package aop;
 
-import exception.ValidateException;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.Errors;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
-//@Component
-//@Aspect
-//@Order(2)
+@Component
+@Aspect
+@Order(2)
 public class ParamValidatorInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(ParamValidatorInterceptor.class);
@@ -20,7 +21,7 @@ public class ParamValidatorInterceptor {
     }
 
     @Before("matchController()")
-    public void before() {
+    public void before(JoinPoint joinPoint) {
         logger.debug("before");
     }
 
@@ -41,15 +42,15 @@ public class ParamValidatorInterceptor {
 
     @Around("matchController()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        logger.debug("around");
-        Object[] args = joinPoint.getArgs();
-        Object lastParam = args[args.length - 1];
-        if (lastParam instanceof Errors) {
-            Errors errors = (Errors) lastParam;
-            if (errors.hasErrors()) {
-                throw new ValidateException(args[0], errors.getFieldError().getDefaultMessage());
-            }
-        }
+//        logger.debug("around");
+//        Object[] args = joinPoint.getArgs();
+//        Object lastParam = args[args.length - 1];
+//        if (lastParam instanceof Errors) {
+//            Errors errors = (Errors) lastParam;
+//            if (errors.hasErrors()) {
+//                throw new ValidateException(args[0], errors.getFieldError().getDefaultMessage());
+//            }
+//        }
         return joinPoint.proceed();
     }
 }
