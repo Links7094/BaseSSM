@@ -82,5 +82,6 @@ public class JsonResult<T> {
         public int getCode() {
             return code;
         }
+
     }
 }

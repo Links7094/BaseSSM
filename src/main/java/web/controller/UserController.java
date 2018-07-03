@@ -1,6 +1,7 @@
 package web.controller;
 
 
+import entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import service.UserService;
 import web.JsonResult.ResultCode;
 import web.JsonResult;
-import web.validator.User;
+import web.dto.UserInput;
 
 import javax.validation.Valid;
 
@@ -20,12 +21,14 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-    private static final Logger loger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     UserService userService;
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public JsonResult<User> get(@Valid @RequestBody User u) {
+    public JsonResult<UserInput> get(@Valid @RequestBody UserInput u) {
+        User user = u.convert();
+        logger.debug("user -->  {}", user);
         userService.get();
         return new JsonResult<>(ResultCode.SUCCESS, u);
     }
