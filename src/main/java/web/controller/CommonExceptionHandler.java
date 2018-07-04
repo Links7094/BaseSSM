@@ -26,7 +26,7 @@ public class CommonExceptionHandler {
     public JsonResult handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         logger.error("校验异常");
         logger.error("request params --> {}", e.getBindingResult().getTarget().toString());
-        return new JsonResult(ResultCode.VALIDATE_ERROR);
+        return new JsonResult(ResultCode.VALIDATE_ERROR, e.getBindingResult().getFieldError().getDefaultMessage());
     }
 
     @ExceptionHandler(ValidateException.class)

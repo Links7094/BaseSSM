@@ -1,8 +1,11 @@
 package web;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class JsonResult<T> {
     private ResultCode code;
     private String msg;
@@ -22,31 +25,7 @@ public class JsonResult<T> {
 
     public JsonResult(ResultCode code, String msg, T data) {
         this.code = code;
-        this.msg = msg == null ? code.getDesc() : msg;
-        this.data = data;
-    }
-
-    public ResultCode getCode() {
-        return code;
-    }
-
-    public void setCode(ResultCode code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
+        this.msg = msg == null ? code.getText() : msg;
         this.data = data;
     }
 
@@ -57,25 +36,15 @@ public class JsonResult<T> {
         VALIDATE_ERROR(-2, "校验异常"),;
 
         private int code;
-        private String desc;
+        private String text;
 
-        ResultCode(int code, String desc) {
+        ResultCode(int code, String text) {
             this.code = code;
-            this.desc = desc;
+            this.text = text;
         }
 
-        public String getDesc() {
-            return desc;
-        }
-
-        @JsonCreator
-        public static ResultCode getItem(int code) {
-            for (ResultCode item : values()) {
-                if (item.code == code) {
-                    return item;
-                }
-            }
-            return null;
+        public String getText() {
+            return text;
         }
 
         @JsonValue

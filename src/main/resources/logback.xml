@@ -8,10 +8,10 @@
     <!-- 动态日志级别 -->
     <jmxConfigurator />
     <!-- 定义日志文件 输出位置 -->
-    <!-- <property name="log_dir" value="C:/test" />-->
-    <property name="log_dir" value="E:/log" />
+    <!-- <property name="log_dir" code="C:/test" />-->
+    <property name="log_dir" code="E:/log" />
     <!-- 日志最大的历史 30天 -->
-    <property name="maxHistory" value="30" />
+    <property name="maxHistory" code="30" />
 
     <!-- ConsoleAppender 控制台输出日志 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -126,7 +126,7 @@
     <!-- root级别 DEBUG -->
     <root>
         <!-- 打印debug级别日志及以上级别日志 -->
-        <level value="debug" />
+        <level code="debug" />
         <!-- 控制台输出 -->
         <appender-ref ref="console" />
         <!-- 文件输出 -->

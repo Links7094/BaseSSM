@@ -1,5 +1,6 @@
 package entity;
 
+import constant.Sex;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +15,9 @@ public class User {
     private String account;
     private String password;
     private String salt;
+    private String name;
     private short age;
+    private Sex sex;
     private int companyId;
     private Date createTime;
     private Boolean isDeleted;

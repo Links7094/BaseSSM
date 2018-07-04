@@ -27,6 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public JsonResult<UserInput> get(@Valid @RequestBody UserInput u) {
+        logger.debug("userInput -->  {}", u);
         User user = u.convert();
         logger.debug("user -->  {}", user);
         userService.get();

@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
   COMMENT '盐',
   name        VARCHAR(20) COMMENT '用户名',
   age         TINYINT UNSIGNED COMMENT '年龄',
+  sex         TINYINT UNSIGNED COMMENT '性别， 1：男 2：女 3：其他',
   company_id  INT UNSIGNED COMMENT '外键关联企业表',
   create_time TIMESTAMP    DEFAULT now(),
   is_deleted  BOOLEAN      DEFAULT FALSE,
