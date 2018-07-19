@@ -28,7 +28,7 @@ public class UserInput implements Converter<User> {
         User user = new User();
         BeanUtils.copyProperties(this, user);
         if (this.company != null) {
-            user.setCompany(this.company.convert());
+//            user.setCompany(this.company.convert());
         }
         return user;
     }

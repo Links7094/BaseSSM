@@ -1,12 +1,19 @@
 package mapper;
 
 import entity.User;
-
+import entity.UserExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends Mapper<User> {
+    int countByExample(UserExample example);
 
-    User get(int id);
+    int deleteByExample(UserExample example);
 
-    List<User> getList();
+    List<User> selectByExample(UserExample example);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 }

@@ -1,5 +1,6 @@
 package service;
 
+import mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,11 @@ public class UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
+    private UserMapper userMapper;
+
     public void get(){
+//        userMapper.selectByExample()
         logger.debug("userService.get()");
     }
+
 }
