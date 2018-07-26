@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import service.UserService;
-import web.JsonResult.ResultCode;
 import web.JsonResult;
+import web.JsonResult.ResultCode;
 import web.dto.UserInput;
 
 import javax.validation.Valid;
@@ -26,11 +26,20 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public JsonResult<UserInput> get(@Valid @RequestBody UserInput u) {
+    public JsonResult<User> get(@Valid @RequestBody UserInput u) {
         logger.debug("userInput -->  {}", u);
-        User user = u.convert();
-        logger.debug("user -->  {}", user);
-        userService.get();
-        return new JsonResult<>(ResultCode.SUCCESS, u);
+        User params = u.convert();
+        logger.debug("user -->  {}", params);
+        User user = userService.get(params);
+        return new JsonResult<>(ResultCode.SUCCESS, user);
     }
+
+//    @RequestMapping(value = "/test", method = RequestMethod.GET)
+//    public JsonResult<String> test() {
+//        logger.debug(driverClass);
+//        logger.debug(user);
+//        logger.debug(password);
+//        logger.debug(jdbcUrl);
+//        return new JsonResult<>(ResultCode.SUCCESS, "hehe", null);
+//    }
 }

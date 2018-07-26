@@ -11,7 +11,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableTransactionManagement
 @Import(DbConfig.class)
-//@Import({LogbackConfig.class})
 public class AppConfig {
-
 }
