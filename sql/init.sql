@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS tb_company (
   name        VARCHAR(50) UNIQUE
   COMMENT '企业名称，唯一',
   address     VARCHAR(100) COMMENT '企业地址',
-  create_time TIMESTAMP    DEFAULT now(),
+  create_time DATETIME    DEFAULT now(),
   is_deleted  BOOLEAN      DEFAULT FALSE,
   PRIMARY KEY (id)
 )
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
   age         TINYINT UNSIGNED COMMENT '年龄',
   sex         TINYINT UNSIGNED COMMENT '性别， 1：男 2：女 3：其他',
   company_id  INT UNSIGNED COMMENT '外键关联企业表',
-  create_time TIMESTAMP    DEFAULT now(),
+  create_time DATETIME    DEFAULT now(),
   is_deleted  BOOLEAN      DEFAULT FALSE,
   PRIMARY KEY (id),
   FOREIGN KEY (company_id) REFERENCES tb_company (id)

@@ -5,12 +5,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Aspect
-@Order(2)
+//@Aspect
+//@Order(2)
 public class ParamValidatorInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(ParamValidatorInterceptor.class);
