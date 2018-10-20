@@ -31,7 +31,10 @@ public class UserController {
         User params = u.convert();
         logger.debug("user -->  {}", params);
 //        User user = userService.get(params);
-        return new JsonResult<>(ResultCode.SUCCESS, params);
+        User user = new User();
+        user.setAccount("links");
+        user.setPassword("jenkins");
+        return new JsonResult<>(ResultCode.SUCCESS, user);
     }
 
 //    @RequestMapping(value = "/test", method = RequestMethod.GET)
