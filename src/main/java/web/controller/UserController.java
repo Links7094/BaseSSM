@@ -30,8 +30,8 @@ public class UserController {
         logger.debug("userInput -->  {}", u);
         User params = u.convert();
         logger.debug("user -->  {}", params);
-        User user = userService.get(params);
-        return new JsonResult<>(ResultCode.SUCCESS, user);
+//        User user = userService.get(params);
+        return new JsonResult<>(ResultCode.SUCCESS, params);
     }
 
 //    @RequestMapping(value = "/test", method = RequestMethod.GET)
