@@ -30,10 +30,10 @@ public class UserController {
         logger.debug("userInput -->  {}", u);
         User params = u.convert();
         logger.debug("user -->  {}", params);
-//        User user = userService.get(params);
-        User user = new User();
-        user.setAccount("links");
-        user.setPassword("jenkins");
+        User user = userService.get(params);
+//        User user = new User();
+//        user.setAccount("links");
+//        user.setPassword("jenkins");
         return new JsonResult<>(ResultCode.SUCCESS, user);
     }
 
